@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <link rel="stylesheet" href="../public/css/register.css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script
+        src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="row centered-form">
+        <div class="col-xs-12 col-sm-8 col-md-4 col-sm-offset-2 col-md-offset-4">
+        	<div class="panel panel-default">
+        		<div class="panel-heading">
+			    		<h3 class="panel-title text-center">Register <small>It's free!</small></h3>
+			 			</div>
+			 			<div class="panel-body">
+			    		<form role="form">
+			    			<div class="row">
+			    				<div class="">
+			    					<div class="form-group">
+			                            <input type="text" name="username" id="username" class="form-control input-sm" placeholder="Username">
+			    					</div>
+                                </div>
+                                <div class="">
+                                    <div class="form-group">
+                                        <input type="email" name="email" id="email" class="form-control input-sm" placeholder="Email Address">
+                                    </div>
+                                </div>
+                                <div class="">
+			    					<div class="form-group">
+			    						<input type="password" name="password" id="password" class="form-control input-sm" placeholder="Password">
+			    					</div>
+			    				</div>			
+			    			</div>
+			    			<input type="button" value="Register" class="btn btn-register btn-info btn-block">
+			    		
+			    		</form>
+			    	</div>
+	    		</div>
+    		</div>
+    	</div>
+    </div>
+</body>
+<script>
+    $(".btn-register").click(function(){
+        checkBlank();
+        $.ajax({
+            url:"/register",
+            type:"Post",
+            data:{
+                username : $("#username").val() ,
+                email : $("#email").val() ,
+                password : $("#password").val()
+            }
+        }).then((res)=>{
+            if(res.err == "true"){
+                alert("Username is existed")
+            }else{
+                window.location.href = "/login-giao-dien"
+            }
+        })
+    })
+
+    function checkBlank(){
+        if($("#username").val()== "" || $("#email").val()== "" || $("#password").val()== "" ){
+            alert("can not blank")
+        }
+    }
+</script>
+</html>
+
